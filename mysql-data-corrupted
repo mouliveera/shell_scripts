@@ -1,0 +1,44 @@
+### Mysql data corrupted: ###
+
+
+
+When ever we observed the data is corrupted, we need to sync the data from neighboring  good node.
+
+
+
+> Example: 
+
+> Good Node: ec-db-cfg-c1.cl.adap.tv
+
+> Bad Node: ec-db-cfg-b1.cl.adap.tv
+
+
+
+If there are issues with ec-db-cfg-b1.cl.adap.tv then better to copy the data from ec-db-cfg-c1.cl.adap.tv
+
+Good node: **ec-db-cfg-c1.cl.adap.tv** if the slave status is showing good.
+
+Notify in channel
+Stop the mysql service on both nodes [Good node:ec-db-cfg-c1.cl.adap.tv  Bad node: ec-db-cfg-b1.cl.adap.tv ]
+~~~python
+       # server mysql stop   (or) /etc/init.d/mysql stop  (or) stop mysql
+~~~
+
+Take a back-up of auto.cfg file under /data/mysql/data/    
+~~~python
+       #cp /data/mysql/data/auto.cfg /tmp/auto.cfg
+~~~
+
+Login to the bad node and Start data copy from good node.
+~~~python
+#rsync -aP ec-db-cfg-c1.cl.adap.tv:/data/mysql/data/  /data/mysql/data/ —delete
+~~~
+
+Once you are done with copy
+rsync -aP ec-db-cfg-c1.cl.adap.tv:/opt/db/mysql/relaylogs/  /opt/db/mysql/relaylogs/ —delete
+Remove the file auto.cfg under  /data/mysql/data/ 
+Now copy the backup file /tmp/auto.cfg to /data/mysql/data/ , grant proper permissions mysql:mysql
+Start mysql service on both nodes.
+Data with starts catching UP. 
+
+
