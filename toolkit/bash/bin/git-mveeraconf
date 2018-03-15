@@ -1,0 +1,17 @@
+#!/bin/bash
+
+################################################################################
+# configurations prefered for git
+# 
+# run:
+# `git mveeraconf`
+# to initiate this code in your repository and introduct the config
+#
+
+echo "Adding mveeraconf to your git repo"
+
+echo " - push.default = current"
+git config push.default "current"
+
+echo "Done!"
+

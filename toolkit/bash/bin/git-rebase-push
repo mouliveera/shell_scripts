@@ -1,0 +1,18 @@
+#!/bin/bash
+
+################################################################################
+# rebase from master, then force push to remote
+#
+
+#BRANCH=origin/master
+#PUSH_TYPE$(git config push.default)
+#git mveeraconf
+#
+#if [ -z "$1" ]
+#then
+#  BRANCH=$1
+#fi
+#
+#
+#git rebase $BRANCH
+#git push --force-with-lease

@@ -13,7 +13,9 @@ while [[ $# -eq 0 ]]; do
 
 sname=$1
 
+
 for hname in `cat /Users/mouliveera/dev_repbiz_host`;do
+
 
 if [ ${sname} == "repbiz" ]
 
@@ -39,7 +41,8 @@ done >  /tmp/service_status.txt      #Copying the result to service_status.txt f
 
 ######## 
 
-nhost=$(cat /Users/mouliveera/dev_repbiz_host|wc -l)
+#nhost=$(cat /Users/mouliveera/dev_repbiz_host|wc -l)
+nhost=$(cat /etc/nagios4/dev-repbiz.cfg|wc -l)
 upservices=$(cat /tmp/service_status.txt |awk '{print $1 "  " $4}' |grep -i up)
 
 downservices=$(cat /tmp/service_status.txt |awk '{print $1 "  " $4}' |grep -i down)

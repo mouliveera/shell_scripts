@@ -1,0 +1,8 @@
+#!/bin/bash
+
+################################################################################
+# Alias command to `git push --force-with-lease`
+#
+
+echo "git push --force-with-lease"
+git push --force-with-lease
