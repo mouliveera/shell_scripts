@@ -13,7 +13,6 @@ while [[ $# -eq 0 ]]; do
 
 sname=$1
 
-
 for hname in `cat /Users/mouliveera/dev_repbiz_host`;do
 
 
