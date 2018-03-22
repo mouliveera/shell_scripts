@@ -4,17 +4,17 @@
 
 #Dev_Clusterhname = dev-repbiz-backend-i-02cbe7e0646df8a92.j.r4e-dev dev-repbiz-frontend-i-083e7fa0c6e2fdd3d.j.r4e-dev
 
-rm -rf /tmp/service_status.txt.  #remove files existing before it gets executed
+#rm -rf /tmp/service_status.txt.  #remove files existing before it gets executed
+
 while [[ $# -eq 0 ]]; do
-        echo "USAE: $0 <service_name>"
-        exit 1
-        done
+	echo "USAE: $0 <service_name>"
+	exit 1
+	done
 #sname=repbiz
 
 sname=$1
 
 for hname in `cat /Users/mouliveera/dev_repbiz_host`;do
-
 
 if [ ${sname} == "repbiz" ]
 
@@ -36,12 +36,11 @@ echo "$hname Service:$sname is DOWN"
 
 fi
 
-done >  /tmp/service_status.txt      #Copying the result to service_status.txt file
+done > /dev/null # /tmp/service_status.txt      #Copying the result to service_status.txt file
 
 ######## 
 
-#nhost=$(cat /Users/mouliveera/dev_repbiz_host|wc -l)
-nhost=$(cat /etc/nagios4/dev-repbiz.cfg|wc -l)
+nhost=$(cat /Users/mouliveera/dev_repbiz_host|wc -l)
 upservices=$(cat /tmp/service_status.txt |awk '{print $1 "  " $4}' |grep -i up)
 
 downservices=$(cat /tmp/service_status.txt |awk '{print $1 "  " $4}' |grep -i down)
