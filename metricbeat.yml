@@ -1,0 +1,9 @@
+---
+- name: Install metricbeat
+  hosts: []  #host list dummy; we can specify some hostgroup name if you want apply it on.
+  gather_facts: false
+  strategy: "{{strategy|default('linear')}}"
+  max_fail_percentage: "{{max_fail_percentage | default (100)}}"
+  roles:
+  - {role: metricbeat, tags: metricbeat}
+

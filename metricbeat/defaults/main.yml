@@ -1,0 +1,22 @@
+---
+# change this to `latest` to always get the most up to date version
+metricbeat_install_state: present
+
+# modules configuration
+metricbeat_modules:
+  - module: system
+    metricsets:
+      - filesystem
+    period: 1m
+    filters:
+      # only include the root partition
+      - drop_event.when.regexp.mount_point: ^/.+$
+
+# output configuration
+metricbeat_output:
+  elasticsearch:
+    hosts:
+      - sherlock:9200
+
+# general/global config options
+metricbeat_general_config: {}
