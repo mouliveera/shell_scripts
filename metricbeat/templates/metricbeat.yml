@@ -1,0 +1,36 @@
+# Ansible: metricbeat | templates/metricbeat.yml
+## Log prospectors
+#Configure Metric Beat in all servers with only sysmtem module.
+
+# modules configuration
+metricbeat.modules:
+  - cpu_ticks: false
+    enabled: true
+    metricsets: [cpu, filesystem, memory, network, process]
+    module: system
+    period: 1m
+    processes: [.*]
+
+#Non-system modules
+metricbeat.modules:
+  - module: redis
+    metricsets: [info, keyspace]
+    period: 1m
+    hosts: [{% for host in groups['r4e-redis'] %}'{{host}}:9696'{% if not loop.last %}, {% endif %}{%endfor%}]
+    password: 12c1762d8e64d9b1486d46975d11b49cf3d6da6704af727948788a526272bb47
+    enabled: true
+  - module: mongodb
+    metricsets: [dbstats, status]
+    period: 10s
+    enabled: true
+    hosts: [{% for i in ['r4e-mongo-dbs', 'r4e-mongos'] %}{%for host in groups[i]  %}'{{host}}:27017'{% if not loop.last %}, {% endif %}{%endfor%}{% if not loop.last %}, {% endif %}{%endfor%}]
+  - module: postgresql
+    metricsets: [database, activity, bgwriter]
+    enabled: true
+    period: 10s
+    hosts:[{% for host in groups['r4e-rds'] %}'{{host}}:5432'{% if not loop.last %}, {% endif %}{%endfor%}]
+
+## Output configuration
+output:
+  elasticsearch:
+    hosts: ['sherlock:9200']

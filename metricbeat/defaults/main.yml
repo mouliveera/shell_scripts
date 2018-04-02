@@ -6,11 +6,15 @@ metricbeat_install_state: present
 metricbeat_modules:
   - module: system
     metricsets:
+      - cpu
       - filesystem
+      - memory
+      - network
+      - process
+    enabled: true
     period: 1m
-    filters:
-      # only include the root partition
-      - drop_event.when.regexp.mount_point: ^/.+$
+    processes: ['.*']
+    cpu_ticks: false
 
 # output configuration
 metricbeat_output:
@@ -20,3 +24,9 @@ metricbeat_output:
 
 # general/global config options
 metricbeat_general_config: {}
+
+metricbeat_plugins:
+- redis
+- mongodb-client
+- postgresql-client
+
