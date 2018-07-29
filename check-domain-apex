@@ -1,0 +1,64 @@
+#!/bin/bash -u
+#################################################################################
+# xxxxxxx
+#
+# This script....
+#
+################################################################################
+#
+# Change Log (Most recent first)
+# 20Aug17
+# -created...
+################################################################################
+DEBUG=${DEBUG:=false}
+$DEBUG && set -x
+
+OK=0
+WARNING=1
+CRITICAL=2
+UNKNOWN=3
+
+if [ "$#" -eq 0 ]
+then
+    echo "DOMAIN APEX UNXNOWN: Domain apex must be specified."
+   exit $UNKNOWN
+else
+    domain_apex=$1
+fi
+shift
+#check for no more args
+if [ "$#" -ne 0 ]
+then
+    echo "DOMAIN APEX UNXNOWN: Extraneous argemunts specified. '$@'"
+    exit $UNKNOWN
+fi
+
+apex_addresses=$(host $domain_apex | sed -nre 's/.* has (\w+ )?address //p')
+if [ -z "$apex_addresses" ]
+then
+    echo "DOMAIN APEX UNXNOWN: No domain apex address records found for $domain_apex"
+    exit $UNKNOWN
+fi
+
+$DEBUG && echo apex_addresses="'$apex_addresses'"
+missing_domain_apex_addresses=()
+for apex_address in $apex_addresses
+do
+    if host www.$domain_apex | egrep -q $apex_address
+    then
+		$DEBUG && echo apex_address $apex_addresses found!
+        continue
+    else
+		$DEBUG && echo apex_address $apex_addresses missing!
+        missing_domain_apex_addresses+=($apex_address)
+    fi
+done
+
+if [ ${#missing_domain_apex_addresses[@]} -gt 0 ]
+then
+    echo "DOMAIN APEX CRITICAL: One or more '$domain_apex' domain apex alias addresses [$(echo ${missing_domain_apex_addresses[@]})] not found in www.$domain_apex"
+    exit $CRITICAL
+fi
+
+echo "DOMAIN APEX OK: All '$domain_apex' domain apex alias addresses [$(echo ${apex_addresses[@]})] found in www.$domain_apex"
+exit $OK
