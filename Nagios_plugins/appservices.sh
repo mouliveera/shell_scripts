@@ -18,7 +18,7 @@ print_version() {
 }
 
 print_usage() {
-    echo "Arguments are missing:  USAGE: $PROGNAME -u <Enter URL> "
+    echo "Arguments are missing:  USAGE: $PROGNAME -H|--host HOSTNAME "
 
 }
 
@@ -37,17 +37,17 @@ print_help() {
     echo "$PROGNAME [-u/--url]"
     echo ""
     echo "Options:"
-    echo "  --version|-v)"
-    echo "    Defines version"
-    echo "  --help|-h)"
-    echo "    Help..."
-    echo "  --host|-H)"
-    echo "    Defines hostname" 
+    echo "--version|-v)"
+    echo "Defines version"
+    echo "--help|-h)"
+    echo "Help..."
+    echo "--host|-H HOSTNAME)"
+    echo "Defines hostname" 
     exit $ST_UK
 }
 
 sleep $interval
-if [ -z "$1" ];then print_help;exit $ST_UK;fi
+if [ -z "$1" ];then print_usage;exit $ST_UK;fi
 
 sleep $interval
 #if [ $# -ne 2 ];then print_help;fi
@@ -63,7 +63,7 @@ while test -n "$1"; do
             ;;
 	--host|-H)
           HOST=$2
-	    if [ -z "$2" ];then print_usage;exit $ST_UK;fi
+#	    if [ -z "$2" ];then print_usage;exit $ST_UK;fi
             URL="http://$HOST:81?serviceconfig"
             shift
             ;;

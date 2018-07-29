@@ -141,13 +141,3 @@ fi
 fi
 
 #END
-
-#Usage of the code
-#Check description:
-
-#Thresholds: Warning = 7300sec , Critical = 8000sec
-#If the snapshot fails to take in 8000sec[2.22hrs] it will alert us with CRITICAL notification
-#If the snapshot has taken with in the threshold 7300sec[approx 2hrs], status of the service will be OK, it displays when the snapshot has taken and shapshot age.
-
-#Ex: 
-#Status Information: | OK - Recent snapshot has taken @ Sun Mar 18 20:00:01 PDT 2018, snapshot age is 1h:0m:0s
