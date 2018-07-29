@@ -124,5 +124,4 @@ fi
 
 #END
 
-#It checks for snapshot age on aws instances. Wehre we enable cronjobs to take snapshots for every 2 hrs. They generate log and updates snapshot log
-# We gather info and dispaly in Nagios
+
