@@ -5,32 +5,34 @@
     packages:
     - apt-transport-https
     state: present
-    apt_force: yes
+  become: true
 
 - name: add elasticstack GPG key
   become: true
   apt_key:
     url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
     state: present
+  become: true
 
 - name: add elasticstack repository
   apt_repository:
     repo: deb https://artifacts.elastic.co/packages/5.x/apt stable main
     state: present
     update_cache: yes
+  become: true
 
 - name: install metricbeat
   include: roles/apt-install/tasks/main.yml
   vars:
     packages:
     - metricbeat
-    state: present
-    apt_force: yes
+    state: installed
+  become: true
 
 - name: copy metricbeat configuration
   become: true
   template:
-    src: metricbeat.yml.j2
+    src: metricbeat.yml
     dest: /etc/metricbeat/metricbeat.yml
     owner: root
     group: root
@@ -43,3 +45,10 @@
     name: metricbeat
     state: started
     enabled: yes
+
+- name: Additonal plugins
+  include: roles/apt-install/tasks/main.yml
+  vars:
+    packages:
+    - "{{metricbeat_plugins}}"
+...
