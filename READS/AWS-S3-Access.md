@@ -5,18 +5,24 @@
 `MacOS:` brew install awscli
 
 Check the aws version is installed or not by the following command
+```shell
 aws --version
+```
 
 
 Enter your Access key ID and Secret Access Key in AWS Config file.
 Try
+```
 ❯ aws configure
+```
 
 You can use default for region and output format
 
 (or)
+```
 ❯ vi ~/.aws/config
-
+```
+Use below lines as reference and adjust aws_access_key_id and aws_secret_access_key values.
 ```
 ##############
 # Apple
