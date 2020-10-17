@@ -1,14 +1,14 @@
-#### Learn REDIS
+## LEARN REDIS
 
 Redis is a Open source, BSD licensed advanced key-value store. Its a InMemory key-value store, with persistence.[That means it can be used a database or caching layer or a message broker]
 
 REDIS is a key-value store and often referred as data structured server. keys can contain strings, hashes, List, sets and sorted sets.
 
-###### Redis: Stands for REmote DIctionar Server
+#### Redis: Stands for REmote DIctionar Server
 
 Written in C and it is NoSql database
 
-Advantages:
+##### Advantages:
 Exceptionally Fast: Redis is very fast and can perform about 110000 SETS per second and about 81000 GETS per second
 
 Supports rich data types: It uses most of datatypes which developers known such as lists, strings, sets, sorted sets and hashes.
@@ -17,9 +17,13 @@ Operations are atomic: If two clients access redis server concurrently, redis se
 
 Example use case: Any Short lived data in your application, such as web application sessions, web page hit count etc.
 
-REDIS DataTypes:
+##### REDIS DataTypes:
 Redis supports 5 data types - Strings, Lists, Hashes, Sets, Sorted Sets
 Strings: String is sequence of bytes. You can store anything up to 512 megabytes in one string. Redis strings commands are used for managing string values in Redis.
+
+STRINGS:
+
+```shell
 
 SET used to load string values to Keys
 GET Gets the value of the key.
@@ -39,9 +43,10 @@ list
 --
 127.0.0.1:6379> type myname
 string
-------------------------------------------------
 
-Hashes:
+```
+
+HASHES:
 Hashes are maps between string fields and string values. Its a collections of key value pairs.
 Every hash can store more than 4 billion field value pairs.
 
