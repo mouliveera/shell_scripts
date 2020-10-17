@@ -47,38 +47,43 @@ string
 ```
 
 HASHES:
-Hashes are maps between string fields and string values. Its a collections of key value pairs.
-Every hash can store more than 4 billion field value pairs.
+- Hashes are maps between string fields and string values. Its a collections of key value pairs.
+- Every hash can store more than 4 billion field value pairs.
 
 
 LISTS:
+
 Redis lists are simply lists of strings, sorted by insertion order
+```shell
 LPUSH: Add a value to list
 LPOP: Remove an element from the List
 LLEN: Gets the length of the list
+```
 
 SET:
-Redis Sets are an unordered collection of unique strings. Sets does not allow repetition of data in a key.
-
+- Redis Sets are an unordered collection of unique strings. Sets does not allow repetition of data in a key.
+```shell
 SADD: Add one or more members to a set
 SMEMBERS: Get the members in the key
 SMOVE: Move members from one set to another [Ex: SMOVE source destination member]
 SUNION: Adds multiple set.
-
-SORTED SET: Similar to sets and addon is it gives score to the value. Every member of sorted set is associated with a score.
+```
+SORTED SET: 
+- Similar to sets and addon is it gives score to the value. Every member of sorted set is associated with a score.
+```shell
 ZADD test 1 redis
+```
 
-------------------------------------------------
 ## Redis - Publish Subscribe
 Redis Pub/Sub implements the messaging system where the senders (in redis terminology called publishers) sends the messages while the receivers (subscribers) receive them. The link by which the messages are transferred is called channel.
 
 Subscribe open a channel and publisher sends messages using channels.
-------------------------------------------------
+
 ## Redis - Transactions:
 It allows you to execute group of commands in a single step. Run MULTI and start passing commands, once you are done with passing all the commands. Run EXEC to end it. We can see it runs the all the commands in a sequence.
 
 Use DISCARD to discard all commands.
-------------------------------------------------
+
 
 ## Some HelpFul commands
 EVAL helps us to write Redis scripting[Lua interpreter, started from redis 2.6.0]
