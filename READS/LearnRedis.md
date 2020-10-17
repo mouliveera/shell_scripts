@@ -38,7 +38,7 @@ GETRANGE: Gets a substring of the string stored at a key.
 GETSET: Sets the string value of a key and return its old value.
 TYPE: Return datatype of value stored in the key.
 EX:
-127.0.0.1:6379> type meru_r4e-meru-58d4b456b9-5fwfg_job_inbound
+127.0.0.1:6379> type <KEY_NAME>
 list
 --
 127.0.0.1:6379> type myname
